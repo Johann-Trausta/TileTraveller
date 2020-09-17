@@ -1,7 +1,9 @@
 # Algorithm:
-# 1. Byrjum á að setja upp staðsetninguna á x og y og inputið þar sem þú setur inn áttina 
-# 2. Setjum síðan upp fjögur föll sem taka inn inputin um áttina og bæta við eða draga frá 
+# 1. Byrjum á að setja upp staðsetninguna á x og y 
+# 2. Setjum síðan upp tvö föll sem taka inn input um áttina og bæta við eða draga frá 
 # 3. Gerum föll sem segja hvar veggirnir eru og hvaða áttir eru mögulegar
+# 4. Setjum upp while lykkju sem prentar út hvaða áttir er hægt að fara í og tekur inn hvaða átt maður vill
+
 def plus_direction(A):
     A += 1
     return A
@@ -12,17 +14,11 @@ def minus_direction(A):
 
 def check_direction(A):
     A = fixed_format(A)
-    if A == possible_north:
-        return 
-    elif A == possible_south:
-        return
-    elif A == possible_east:
-        return
-    elif A == possible_west:
-        return
-    else:
+    if A == None:
         return False
-    
+    else:
+        return A
+
 def fixed_format(A):
     if A == "N" or A == "n":
         A = possible_north
@@ -33,19 +29,57 @@ def fixed_format(A):
     elif A == "W" or A == "w":
         A = possible_west
     else:
-        return A
+        return None
     return A
 
-def possible_direction_x()
+def north(A):
+    B = A + 1
+    check = walls_y(x, A, B)
+    if check == True:
+        return ("(N)orth")
+
+def south(A):
+    B = A - 1
+    check = walls_y(x, A, B)
+    if check == True:
+        return ("(S)outh")
+
+def east(A):
+    B = A + 1
+    check = walls_x(A, y, B)
+    if check == True:
+        return ("(E)ast")
+
+def west(A):
+    B = A - 1
+    check = walls_x(A, y, B)
+    if check == True:
+        return ("(W)est")
+
+def walls_y(A, B, C):
+    if C > 0 and C < 4:
+        if A == 2 and (C == 3 or B == 3):
+            return None
+        else: 
+            return True
+
+def walls_x(A, B, C):
+    if C > 0 and C < 4:
+        if B != 1:
+            if B == 2 and (C == 3 or A == 3):
+                return None
+            else: 
+                return True
+
 
 x = 1
 y = 1
 
-while x != 3 and y != 3:
-    possible_north = possible_direction_y(y)
-    possible_south = possible_direction_y(y)
-    possible_east = possible_direction_x(x)
-    possible_west = possible_direction_x(x)
+while x != 3 or y != 1:
+    possible_north = north(y)
+    possible_south = south(y)
+    possible_east = east(x)
+    possible_west = west(x)
 
     if possible_north == None:
 
@@ -54,7 +88,7 @@ while x != 3 and y != 3:
             if possible_east == None:
 
                 if possible_west == None:
-                    print("Þú geriðir kraftaverk")
+                    print("Þú gerðir kraftaverk")
                 
                 else:
                     print("You can travel: {}.".format(possible_west))
@@ -66,6 +100,7 @@ while x != 3 and y != 3:
                 print("You can travel: {} or {}.".format(possible_east,possible_west))
 
         elif possible_east == None:
+
             if possible_west == None:
                 print("You can travel: {}.".format(possible_south))
             
@@ -113,6 +148,7 @@ while x != 3 and y != 3:
     chosen_direction=input('Direction: ')
     is_it_possible = check_direction(chosen_direction)
     if is_it_possible == False:
+        print("Not a valid direction!")
         continue
     else:
         if chosen_direction == 'N' or chosen_direction == 'n':
@@ -123,28 +159,5 @@ while x != 3 and y != 3:
             y=minus_direction(y)
         else:
             x=minus_direction(x)
-
-
-        
-        
-
-
-
-
-
-
-    # How_many_are_available = check_none_nopes(possible_north,possible_east,possible_south,possible_west)
-
-    # if How_many_are_available == 1:
-    #     The_direction = Which_direction(possible_north,possible_east,possible_south,possible_west)
-
-    #     print("You can travel: {}".format(The_direction))
-
-    # elif How_many_are_available == 2:
-    #     The_direction == Which_direction(possible_north,possible_east,possible_south,possible_west)
-
-    #     second_direction == Which_direction()
-
-    
-
-
+else: 
+    print("Victory!")
