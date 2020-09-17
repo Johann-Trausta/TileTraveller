@@ -2,7 +2,26 @@
 # 1. Byrjum á að setja upp staðsetninguna á x og y og inputið þar sem þú setur inn áttina 
 # 2. Setjum síðan upp fjögur föll sem taka inn inputin um áttina og bæta við eða draga frá 
 # 3. Gerum föll sem segja hvar veggirnir eru og hvaða áttir eru mögulegar
+def plus_direction(A):
+    A += 1
+    return A
 
+def minus_direction(A):
+    A -= 1
+    return A
+
+def check_direction(A):
+    A = fixed_format(A)
+    if A == possible_north:
+        return 
+    elif A == possible_south:
+        return
+    elif A == possible_east:
+        return
+    elif A == possible_west:
+        return
+    else:
+        return False
 x = 1
 y = 1
 
@@ -76,18 +95,20 @@ while x != 3 and y != 3:
                 print("You can travel: {} or {} or {} or {}.".format(possible_north,possible_east,possible_south,possible_west))
 
     chosen_direction=input('Direction: ')
-    check_direction(chosen_direction)
-
-    if chosen_direction == 'N' or chosen_direction == 'n':
-        y=north_direction(y)
-    elif chosen_direction == 'E' or chosen_direction == 'e':
-        x=east_direction(x)
-    elif  chosen_direction == 'S' or chosen_direction == 's':
-        y=south_direction(y)
+    is_it_possible = check_direction(chosen_direction)
+    if is_it_possible == False:
+        continue
     else:
-        x=west_direction(x)
+        if chosen_direction == 'N' or chosen_direction == 'n':
+            y=plus_direction(y)
+        elif chosen_direction == 'E' or chosen_direction == 'e':
+            x=plus_direction(x)
+        elif  chosen_direction == 'S' or chosen_direction == 's':
+            y=minus_direction(y)
+        else:
+            x=minus_direction(x)
 
-    
+
         
         
 
