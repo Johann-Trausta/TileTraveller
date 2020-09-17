@@ -22,6 +22,22 @@ def check_direction(A):
         return
     else:
         return False
+    
+def fixed_format(A):
+    if A == "N" or A == "n":
+        A = possible_north
+    elif A == "S" or A == "s":
+        A = possible_south
+    elif A == "E" or A == "e":
+        A = possible_east
+    elif A == "W" or A == "w":
+        A = possible_west
+    else:
+        return A
+    return A
+
+def possible_direction_x()
+
 x = 1
 y = 1
 
